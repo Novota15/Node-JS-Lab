@@ -119,67 +119,67 @@ app.get('/home', function(req, res) {
 	})
 });
 
-app.get('/home/pick_color', function(req, res) {
-	var color_choice = req.query.color_selection;
-	var color_options = 'select * from favorite_colors;';
-	var color_message = "select color_msg from favorite_colors where hex_value = '" + color_choice + "';";
-	db.task('get-everything', task => {
-		return task.batch([
-			task.any(color_options),
-			task.any(color_message)
-		]);
-	})
-	.then(info => {
-		res.render('pages/home',{
-			my_title: "Home Page",
-			data: info[0],
-			color: color_choice,
-			color_msg: info[1][0].color_msg
-		})
-	})
-	.catch(error => {
-	// display error message in case an error
-		req.flash('error', err);
-		res.render('pages/home', {
-			title: 'Home Page',
-			data: '',
-			color: '',
-			color_msg: ''
- 		})
- 	});
-});
+// app.get('/home/pick_color', function(req, res) {
+// 	var color_choice = req.query.color_selection;
+// 	var color_options = 'select * from favorite_colors;';
+// 	var color_message = "select color_msg from favorite_colors where hex_value = '" + color_choice + "';";
+// 	db.task('get-everything', task => {
+// 		return task.batch([
+// 			task.any(color_options),
+// 			task.any(color_message)
+// 		]);
+// 	})
+// 	.then(info => {
+// 		res.render('pages/home',{
+// 			my_title: "Home Page",
+// 			data: info[0],
+// 			color: color_choice,
+// 			color_msg: info[1][0].color_msg
+// 		})
+// 	})
+// 	.catch(error => {
+// 	// display error message in case an error
+// 		req.flash('error', err);
+// 		res.render('pages/home', {
+// 			title: 'Home Page',
+// 			data: '',
+// 			color: '',
+// 			color_msg: ''
+//  		})
+//  	});
+// });
 
-app.post('/home/pick_color', function(req, res) {
-	var color_hex = req.body.color_hex;
-	var color_name = req.body.color_name;
-	var color_message = req.body.color_message;
-	var insert_statement = "INSERT INTO favorite_colors(hex_value, name, color_msg) VALUES('" + color_hex + "','" + color_name + "','" + color_message +"') ON CONFLICT DO NOTHING;";
-	var color_select = 'select * from favorite_colors;';
-	db.task('get-everything', task => {
-	return task.batch([
-	task.any(insert_statement),
-	task.any(color_select)
-	]);
-	})
-	.then(info => {
-	res.render('pages/home',{
-	my_title: "Home Page",
-	data: info[1],
-	color: color_hex,
-	color_msg: color_message
-	})
-	})
-	.catch(error => {
-	// display error message in case an error
-	req.flash('error', err);
-	res.render('pages/home', {
-	title: 'Home Page',
-	data: '',
-	color: '',
-	color_msg: ''
-	})
-	});
-	});	
+// app.post('/home/pick_color', function(req, res) {
+// 	var color_hex = req.body.color_hex;
+// 	var color_name = req.body.color_name;
+// 	var color_message = req.body.color_message;
+// 	var insert_statement = "INSERT INTO favorite_colors(hex_value, name, color_msg) VALUES('" + color_hex + "','" + color_name + "','" + color_message +"') ON CONFLICT DO NOTHING;";
+// 	var color_select = 'select * from favorite_colors;';
+// 	db.task('get-everything', task => {
+// 	return task.batch([
+// 	task.any(insert_statement),
+// 	task.any(color_select)
+// 	]);
+// 	})
+// 	.then(info => {
+// 	res.render('pages/home',{
+// 	my_title: "Home Page",
+// 	data: info[1],
+// 	color: color_hex,
+// 	color_msg: color_message
+// 	})
+// 	})
+// 	.catch(error => {
+// 	// display error message in case an error
+// 	req.flash('error', err);
+// 	res.render('pages/home', {
+// 	title: 'Home Page',
+// 	data: '',
+// 	color: '',
+// 	color_msg: ''
+// 	})
+// 	});
+// 	});	
 
 app.listen(3000);
 console.log('3000 is the magic port');
