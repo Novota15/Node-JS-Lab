@@ -109,7 +109,7 @@ app.get('/home', function(req, res) {
 	})
 	.catch(function (err) {
 		// display error message in case an error
-		// req.flash('error', err);
+		req.flash('error', err);
 		res.render('pages/home', {
 			title: 'Home Page',
 			data: '',
@@ -139,7 +139,7 @@ app.get('/home/pick_color', function(req, res) {
 	})
 	.catch(error => {
 	// display error message in case an error
-		// req.flash('error', err);
+		req.flash('error', err);
 		res.render('pages/home', {
 			title: 'Home Page',
 			data: '',
@@ -171,7 +171,7 @@ app.post('/home/pick_color', function(req, res) {
 	})
 	.catch(error => {
 	// display error message in case an error
-	// req.flash('error', err);
+	req.flash('error', err);
 	res.render('pages/home', {
 	title: 'Home Page',
 	data: '',
