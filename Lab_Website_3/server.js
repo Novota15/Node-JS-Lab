@@ -96,7 +96,14 @@ app.get('/register', function(req, res) {
 });
 
 /*Add your other get/post request handlers below here: */
-
+app.get('/home', function(req, res) {
+	res.render('pages/home',{
+	my_title:'Home Page',
+	color: 'FF0000',
+	color_msg: 'The Color Red'
+	});
+});
+	
 
 app.listen(3000);
 console.log('3000 is the magic port');
