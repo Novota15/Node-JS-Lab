@@ -107,16 +107,16 @@ app.get('/home', function(req, res) {
 				color_msg: ''
 			})
 	})
-	.catch(function (err) {
-		// display error message in case an error
-		req.flash('error', err);
-		res.render('pages/home', {
-			title: 'Home Page',
-			data: '',
-			color: '',
-			color_msg: ''
-		})
-	})
+	// .catch(function (err) {
+	// 	// display error message in case an error
+	// 	res.flash('error', err);
+	// 	res.render('pages/home', {
+	// 		title: 'Home Page',
+	// 		data: '',
+	// 		color: '',
+	// 		color_msg: ''
+	// 	})
+	// })
 });
 
 // app.get('/home/pick_color', function(req, res) {
