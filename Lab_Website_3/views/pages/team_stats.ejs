@@ -17,30 +17,94 @@
 			<tr>
 				<th>Home Score</th>
 				<th>Opp. Score</th>
+
 			</tr>
+
+
+
+
+					<% 
+					if (games) {
+					var game = '';
+					games.forEach(function(item) {
+					
+					game += '<tr>' +'<td>' + item.game_date.getMonth() + "-"+  item.game_date.getDate()+ "-" + item.game_date.getFullYear() + '</th>' + '<th>' + item.visitor_name +'</th>' + '<th>' + item.home_score + '</th>'+ '<th>' + item.visitor_score + '</th>' ;
+					if (item.home_score < item.visitor_score){
+					game += '<th>' + item.visitor_name + '</th>' +  '</tr>';
+				}
+					else{
+					game += '<th> CU BOULDER </th>';
+					}
+
+					}); %>
+					<%- game %>
+					<% } %>
+
+
+  
+
+
 			<!-- TODO: Iterate over the Football_table data here 
 						1. Display the information for each row (date, name, home score, visitor score)
 						2. Determine who the winner is and display it in the final column
 
-						If you're not sure how the logic should work here, review the code you add to the client-side javascript
-						that ran onload for Lab 5.  We are doing the same kind of operations we had in Lab 5, but we are instead having
+						If you're not sure how the logic should work here, review the code you add to the client-side javascript that ran onload for Lab 5.  We are doing the same kind of operations we had in Lab 5, but we are instead having
 						everything handled via server-side scriptes
+
+						1.retrieve all of the football games in the Fall 2018 season.
+
+						2.Count the number of winning games in the Fall 2018 season.
+						3.Count the number of losing games in the Fall 2018 season.
+						<​%
+						if (games) { 
+
+
+						data.forEach(function(item){buttons += '​<​button​​ type​=​"submit"​​ name​=​"color_selection" class​=​"btn btn-block"​​style​=​"background-color:#' + item.hex_value + '"​​value​=​"' + item.hex_value + '"​>​';        if(item.name){    buttons += item.name + '​</​button​>​'; } else{    buttons += item.hex_value + '​</​button​>​'; }    }); %>​<​%- buttons %><​% } %>
+
+
 			-->
-			
+					
+
+						
+
 		</table>
 		<br>
 		<table class="table text-center">
 			<tr>
 				<th>Wins</th>
+
 				<th>Losses</th>
 			</tr>
 			<tr>
-				<td> <!-- TODO: Display the total number of wins here.  
-							    This value should come from your server.js files query, don't calculate it in this file! --></td>
-				<td> <!-- TODO: Display the total number of losses here.  
-							    This value should come from your server.js files query, don't calculate it in this file! --></td>
+				<td> 
+					<% 
+					if (wins) {
+					var win = '';
+					wins.forEach(function(item) {
+					
+					win +=  item.count;
+
+					}); %>
+					<%- win %>
+					<% } %>
+
+				 </td>
+				<td> 
+
+<% 
+					if (losses) {
+					var loss = '';
+					losses.forEach(function(item) {
+					
+					loss +=  item.count;
+
+					}); %>
+					<%- loss %>
+					<% } %>
+
+				 </td>
 			</tr>
 		</table>
-		
+
 	</div>
 <% include ../partials/footer %>
