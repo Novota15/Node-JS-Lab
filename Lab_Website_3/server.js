@@ -252,7 +252,7 @@
   });
 });
 
-app.post('/home/player_info/select_player', function(req, res) {
+app.post('/home/player_info', function(req, res) {
   player_name = req.body.player_choice
   var player_year = 'select year from football_players where player = player_name'
   db.task('get-everything', task => {
